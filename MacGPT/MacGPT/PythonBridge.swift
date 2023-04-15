@@ -9,6 +9,11 @@ import Foundation
 import PythonKit
 
 class PythonBridge {
+    
+    private var conversation: [String] = []
+    private var message: String = ""
+    private let pythonBridge = PythonBridge()
+    
     func callPythonScript(scriptName: String, arguments: [String], completion: @escaping (String?) -> Void) {
         guard let scriptURL = Bundle.main.path(forResource: scriptName, ofType: "py") else {
             completion(nil)
@@ -38,9 +43,13 @@ class PythonBridge {
         }
     }
     func sendMessage() {
-        conversation.append("You: \(message)")
-        let response = pythonBridge.answerQuestion(vectorIndexFile: "<path_to_vector_index_file>", question: message)
-        conversation.append("Chatbot: \(response)")
-        message = ""
-    }
+            conversation.append("You: \(message)")
+            let response = pythonBridge.answerQuestion(vectorIndexFile: "<path_to_vector_index_file>", question: message)
+            conversation.append("Chatbot: \(response)")
+            message = ""
+        }
+    func answerQuestion(vectorIndexFile: String, question: String) -> String {
+            // TODO: Implement this method
+            return ""
+        }
 }

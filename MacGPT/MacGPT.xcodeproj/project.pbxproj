@@ -46,13 +46,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D241414929EA15A1003D1942 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		D2FD1C4729E9EAA80030B7E5 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +65,6 @@
 		D2FD1C5229E9EAA80030B7E5 /* MacGPT */ = {
 			isa = PBXGroup;
 			children = (
-				D241414929EA15A1003D1942 /* Resources */,
 				D2FD1C6229E9EC1A0030B7E5 /* Python */,
 				D2FD1C5529E9EAA80030B7E5 /* ContentView.swift */,
 				D2FD1C5729E9EAAA0030B7E5 /* Assets.xcassets */,

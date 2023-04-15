@@ -4,6 +4,8 @@
 //
 //  Created by Daniel Santiago on 4/14/23.
 //
+
+
 import SwiftUI
 
 struct ContentView: View {
@@ -45,4 +47,10 @@ struct ContentView: View {
         }
     }
 
+    func sendMessage() -> Void {
+        conversation.append("You: \(message)")
+        pythonBridge.sendMessage()
+        conversation.append("Chatbot: \(pythonBridge.sendMessage())")
+        message = ""
+    }
 }
