@@ -7,7 +7,7 @@
 import Foundation
 
 struct ChatGPT {
-    private let apiKey = "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"
+    private let apiKey = ""
     
     func sendMessage(message: String, completion: @escaping (Result<String, Error>) -> Void) {
         guard let url = URL(string: "https://api.openai.com/v1/engines/davinci-codex/completions") else {
