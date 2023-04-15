@@ -45,10 +45,4 @@ struct ContentView: View {
         }
     }
 
-    private func sendMessage() {
-        conversation.append("You: \(message)")
-        let response = pythonBridge.answerQuestion(vectorIndexFile: "<path_to_vector_index_file>", question: message)
-        conversation.append("Chatbot: \(response)")
-        message = ""
-    }
 }
