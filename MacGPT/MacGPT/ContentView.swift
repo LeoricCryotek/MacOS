@@ -47,10 +47,12 @@ struct ContentView: View {
         }
     }
 
-    func sendMessage() -> Void {
+    private func sendMessage() {
         conversation.append("You: \(message)")
-        pythonBridge.sendMessage()
-        conversation.append("Chatbot: \(pythonBridge.sendMessage())")
+        let response = pythonBridge.answerQuestion(apiKey: apiKey, vectorIndexFile: "~/Library/Application Support/MacGPT/TextFiles", question: message)
+        conversation.append("Chatbot: \(response)")
         message = ""
     }
+
+
 }

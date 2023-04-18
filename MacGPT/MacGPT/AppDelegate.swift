@@ -1,18 +1,28 @@
-//
-//  AppDelegate.swift
-//  MacGPT
-//
-//  Created by Daniel Santiago on 4/14/23.
-//
 import Cocoa
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var window: NSWindow!
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         
         createAppFolders()
-        
+
+        // Create the SwiftUI view that provides the window contents.
+        let contentView = ContentView()
+
+        // Create the window and set the content view.
+        window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            backing: .buffered, defer: false)
+        window.center()
+        window.setFrameAutosaveName("Main Window")
+        window.contentView = NSHostingView(rootView: contentView)
+        window.makeKeyAndOrderFront(nil)
+
         // Override point for customization after application launch.
     }
     
@@ -21,19 +31,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func createAppFolders() {
         let fileManager = FileManager.default
 
-        guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Error: Unable to find Documents folder.")
+        guard let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            print("Error: Unable to find Application Support folder.")
             return
         }
 
-        let macGPTFolder = documentsURL.appendingPathComponent("MacGPT")
-        let resourcesFolder = macGPTFolder.appendingPathComponent("Resources")
+        let appName = "MacGPT"
+        let appSupportFolder = appSupportURL.appendingPathComponent(appName)
+        let textFilesFolder = appSupportFolder.appendingPathComponent("TextFiles")
 
         do {
-            try fileManager.createDirectory(at: macGPTFolder, withIntermediateDirectories: true, attributes: nil)
-            try fileManager.createDirectory(at: resourcesFolder, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: appSupportFolder, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: textFilesFolder, withIntermediateDirectories: true, attributes: nil)
         } catch {
             print("Error: Unable to create directories: \(error)")
         }
     }
+
 }

@@ -27,5 +27,6 @@ def answer_question(vector_index_file, question):
     return response
 
 if __name__ == "__main__":
-    text_files_directory = "<path_to_your_text_files_directory>"
+    text_files_directory = os.path.expanduser("~/Library/Application Support/MacGPT/TextFiles")
     create_index(text_files_directory)
+

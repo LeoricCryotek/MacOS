@@ -1,18 +1,15 @@
-//
-//  PythonBridge.swift
-//  MacGPT
-//
-//  Created by Daniel Santiago on 4/14/23.
-//
-
 import Foundation
 import PythonKit
 
 class PythonBridge {
     
-    private var conversation: [String] = []
-    private var message: String = ""
-    private let pythonBridge = PythonBridge()
+    private let sys = Python.import("sys")
+    
+    init() {
+        // Get the path to the folder containing the Python scripts
+        let scriptFolder = Bundle.main.resourceURL?.appendingPathComponent("Python").path
+        sys.path.append(scriptFolder ?? "")
+    }
     
     func callPythonScript(scriptName: String, arguments: [String], completion: @escaping (String?) -> Void) {
         guard let scriptURL = Bundle.main.path(forResource: scriptName, ofType: "py") else {
@@ -42,14 +39,15 @@ class PythonBridge {
             completion(nil)
         }
     }
-    func sendMessage() {
-            conversation.append("You: \(message)")
-            let response = pythonBridge.answerQuestion(vectorIndexFile: "<path_to_vector_index_file>", question: message)
-            conversation.append("Chatbot: \(response)")
-            message = ""
-        }
-    func answerQuestion(vectorIndexFile: String, question: String) -> String {
-            // TODO: Implement this method
-            return ""
-        }
+
+    func sendMessage(apiKey: String, message: String, completion: @escaping (String) -> Void) {
+        let response = answerQuestion(apiKey: apiKey, vectorIndexFile: "~/Library/Application Support/MacGPT/TextFiles", question: message)
+        completion(response)
+    }
+
+    func answerQuestion(apiKey: String, vectorIndexFile: String, question: String) -> String {
+        let gpt_index_chatbot = Python.import("gpt_index_chatbot")
+        let response = gpt_index_chatbot.answer_question(apiKey: apiKey, vector_index_file: vectorIndexFile, question: question)
+        return String(describing: response)
+    }
 }

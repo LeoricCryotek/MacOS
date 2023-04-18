@@ -1,24 +1,30 @@
-import Foundation
-import PythonKit
+import os
+from gpt_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
+from langchain import OpenAI
 
-class PythonBridge: NSObject {
-    private let python = Python.shared
+def create_index(path):
+    max_input = 4096
+    tokens = 200
+    chunk_size = 600
+    max_chunk_overlap = 20
 
-    override init() {
-        super.init()
-        guard let pythonPath = Bundle.main.path(forResource: "macgpt", ofType: "py") else {
-            print("Error: Failed to locate macgpt.py")
-            return
-        }
+    promptHelper = PromptHelper(max_input, tokens, max_chunk_overlap, chunk_size_limit=chunk_size)
 
-        // Load the Python script
-        python.run(scriptPath: pythonPath)
-    }
+    llmPredictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-ada-001", max_tokens=tokens))
 
-    func sendMessage(_ message: String) {
-        // Call the Python function to send a message
-    }
+    docs = SimpleDirectoryReader(path).load_data()
 
-    // Add other necessary functions to interact with the Python script
-}
+    vectorIndex = GPTSimpleVectorIndex(documents=docs, llm_predictor=llmPredictor, prompt_helper=promptHelper)
 
+    vectorIndex.save_to_disk('vectorIndex.json')
+
+    return vectorIndex
+
+def answer_question(apiKey: String, vector_index_file: String, question: String) -> String:
+    vIndex = GPTSimpleVectorIndex.load_from_disk(vector_index_file)
+    response = vIndex.query(question, response_mode="compact")
+    return response
+
+if __name__ == "__main__":
+    text_files_directory = "~/Library/Application Support/MacGPT/TextFiles"
+    create_index(text_files_directory)
