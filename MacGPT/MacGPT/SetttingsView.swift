@@ -9,33 +9,38 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var apiKey: String
-    @State private var tempApiKey: String = ""
+    @Binding var isPresented: Bool
+    @State private var savedMessage: String = ""
 
     var body: some View {
         VStack {
-            TextField("Enter API Key", text: $tempApiKey)
+            Text("API Key")
+                .font(.headline)
+            TextField("Enter API Key", text: $apiKey)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Button(action: saveApiKey) {
-                Text("Save API Key")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                .frame(width: 300, height: 30) // Adjust the width as needed
+
+            Text(savedMessage)
+                .foregroundColor(.green)
+
+            HStack {
+                Button("Save") {
+                    UserDefaults.standard.set(apiKey, forKey: "apiKey")
+                    savedMessage = "Saved"
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isPresented = false
+                    }
+                }
+                .padding(.horizontal)
+
+                Button("Exit") {
+                    isPresented = false
+                }
+                .padding(.horizontal)
             }
             .padding(.top)
         }
         .padding()
     }
-    
-    private func saveApiKey() {
-        apiKey = tempApiKey
-    }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(apiKey: .constant(""))
-    }
-}

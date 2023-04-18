@@ -5,7 +5,6 @@
 //  Created by Daniel Santiago on 4/14/23.
 //
 
-
 import SwiftUI
 
 struct ContentView: View {
@@ -16,34 +15,48 @@ struct ContentView: View {
 
     private let pythonBridge = PythonBridge()
 
+    init() {
+        if let savedApiKey = UserDefaults.standard.string(forKey: "apiKey") {
+            apiKey = savedApiKey
+        }
+    }
+
     var body: some View {
         NavigationView {
             VStack {
-                List(conversation, id: \.self) { text in
-                    Text(text)
+                ScrollView {
+                    VStack {
+                        ForEach(conversation, id: \.self) { text in
+                            Text(text)
+                        }
+                    }
                 }
+
+                Spacer()
 
                 Button("Settings") {
                     isShowingSettings = true
                 }
                 .sheet(isPresented: $isShowingSettings) {
-                    SettingsView(apiKey: $apiKey)
-                }
-
-                HStack {
-                    TextField("Type your message...", text: $message)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.leading)
-
-                    Button(action: sendMessage) {
-                        Text("Send")
-                            .padding(.horizontal)
-                    }
+                    SettingsView(apiKey: $apiKey, isPresented: $isShowingSettings)
                 }
                 .padding(.bottom)
             }
-            .navigationTitle("MacGPT")
+            .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationTitle("MacGPT")
+
+            HStack {
+                TextField("Type your message...", text: $message)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.leading)
+                    .frame(width: 900, height: 50)
+
+                Button(action: sendMessage) {
+                    Text("Send")
+                        .padding(.horizontal)
+                }
+            }
         }
     }
 
@@ -53,6 +66,8 @@ struct ContentView: View {
         conversation.append("Chatbot: \(response)")
         message = ""
     }
-
-
 }
+
+
+
+

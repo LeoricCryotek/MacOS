@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D241415D29EEFDE5003D1942 /* MacGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D241415C29EEFDE5003D1942 /* MacGPTApp.swift */; };
 		D2586D5C29EA584A003B26E6 /* SetttingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2586D5B29EA584A003B26E6 /* SetttingsView.swift */; };
 		D2586D5E29EA59BB003B26E6 /* PythonBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2586D5D29EA59BB003B26E6 /* PythonBridge.swift */; };
 		D2FD1C5629E9EAA80030B7E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD1C5529E9EAA80030B7E5 /* ContentView.swift */; };
@@ -15,12 +16,12 @@
 		D2FD1C6429E9EC7C0030B7E5 /* macgpt.py in Resources */ = {isa = PBXBuildFile; fileRef = D2FD1C6329E9EC7C0030B7E5 /* macgpt.py */; };
 		D2FD1C6829E9F9B70030B7E5 /* MacGPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD1C6729E9F9B70030B7E5 /* MacGPT.swift */; };
 		D2FD1C6A29E9FBA80030B7E5 /* gpt_index_chatbot.py in Resources */ = {isa = PBXBuildFile; fileRef = D2FD1C6929E9FBA80030B7E5 /* gpt_index_chatbot.py */; };
-		D2FD1C6C29E9FF2D0030B7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD1C6B29E9FF2D0030B7E5 /* AppDelegate.swift */; };
 		D2FD1C6F29EA00FA0030B7E5 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2FD1C6E29EA00FA0030B7E5 /* PythonKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D241415029EA1627003D1942 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D241415C29EEFDE5003D1942 /* MacGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGPTApp.swift; sourceTree = "<group>"; };
 		D2586D5B29EA584A003B26E6 /* SetttingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetttingsView.swift; sourceTree = "<group>"; };
 		D2586D5D29EA59BB003B26E6 /* PythonBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonBridge.swift; sourceTree = "<group>"; };
 		D2FD1C5029E9EAA80030B7E5 /* MacGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,7 +32,6 @@
 		D2FD1C6329E9EC7C0030B7E5 /* macgpt.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = macgpt.py; sourceTree = "<group>"; };
 		D2FD1C6729E9F9B70030B7E5 /* MacGPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGPT.swift; sourceTree = "<group>"; };
 		D2FD1C6929E9FBA80030B7E5 /* gpt_index_chatbot.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = gpt_index_chatbot.py; sourceTree = "<group>"; };
-		D2FD1C6B29E9FF2D0030B7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +72,9 @@
 				D2FD1C5929E9EAAA0030B7E5 /* Preview Content */,
 				D2586D5D29EA59BB003B26E6 /* PythonBridge.swift */,
 				D2FD1C6729E9F9B70030B7E5 /* MacGPT.swift */,
-				D2FD1C6B29E9FF2D0030B7E5 /* AppDelegate.swift */,
 				D241415029EA1627003D1942 /* README.md */,
 				D2586D5B29EA584A003B26E6 /* SetttingsView.swift */,
+				D241415C29EEFDE5003D1942 /* MacGPTApp.swift */,
 			);
 			path = MacGPT;
 			sourceTree = "<group>";
@@ -175,8 +175,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2FD1C5629E9EAA80030B7E5 /* ContentView.swift in Sources */,
+				D241415D29EEFDE5003D1942 /* MacGPTApp.swift in Sources */,
 				D2586D5C29EA584A003B26E6 /* SetttingsView.swift in Sources */,
-				D2FD1C6C29E9FF2D0030B7E5 /* AppDelegate.swift in Sources */,
 				D2586D5E29EA59BB003B26E6 /* PythonBridge.swift in Sources */,
 				D2FD1C6829E9F9B70030B7E5 /* MacGPT.swift in Sources */,
 			);
